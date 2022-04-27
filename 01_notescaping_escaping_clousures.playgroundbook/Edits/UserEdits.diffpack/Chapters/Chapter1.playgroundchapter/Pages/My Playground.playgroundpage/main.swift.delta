@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//Normal Function
+func suma (a : Int, b : Int) -&gt; Int {
+    return a + b
+}
+print ("Simple Function")
+print (suma (a: 5,b: 8))
+//Simple Clousure
+var f = {(a : Int, b : Int)-&gt; Int in return a + b}
+print ("Simple Clousure")
+print (f(5 , 6))
+
+//Not Escaping and Escaping Clousure
+var arrayEscaping : [()-&gt; Void] = []
+class Test {
+    var x = 10
+    //Not Escaping 
+    func notEscaping(completion : ()-&gt; Void){
+        completion()
+    }
+    func testNotEscaping(){
+        notEscaping (completion: {x = 15})
+    }
+    //Escaping
+    func escaping(completion : @escaping ()-&gt;Void){
+        //Direct function
+        arrayEscaping.append ({self.x = 20})
+        //Send extern function @escaping
+        arrayEscaping.append (completion)
+    }
+    func testEscaping(){
+        //Send extern function @escaping
+        escaping(completion: {self.x = 25})
+    }
+    //Escaping Keep Reference to X
+    func escapingKeepRef (completion : @escaping ()-&gt;Void){
+        //Direct function
+        arrayEscaping.append ({
+            self.x = 30
+            print("Escaping Keep Ref Direct Function : X")
+            print(self.x)
+        })
+        //Send extern function @escaping
+        arrayEscaping.append (completion)
+    }
+    func testEscapingKeepRef(){
+        escapingKeepRef(completion: {self.x = 35
+            print("Escaping Keep Ref Extern Direct Function : X")
+            print(self.x)
+        })
+    }
+    //Escaping Not Keep Reference to X
+    func escapingNotKeepRef (completion : @escaping ()-&gt;Void){
+        //Send extern function @escaping
+        arrayEscaping.append (completion)
+    }
+    func testEscapingNotKeepRef(){
+        //escapingNotKeepRef(completion: {[unowned self] in
+        escapingNotKeepRef(completion: {[weak self] in
+            self?.x = 40
+            print("Escaping Not Keep Ref Extern Direct Function : X")
+            print(self?.x ?? 0)
+        })
+    }
+}
+do {
+    let test1 = Test()
+    //Test Not Scaping Clousure
+    print("Initial : X")
+    print(test1.x)
+    test1.testNotEscaping()
+    print("Not Escaping : X")
+    print(test1.x)
+    //Test Scaping Clousure
+    test1.testEscaping()
+    print("Escaping Direct Function : X")
+    arrayEscaping.first?()
+    print(test1.x)
+    arrayEscaping[0]()
+    print(test1.x)
+    print("Escaping Send Extern Function : X")
+    //arrayEscaping.last?()
+    arrayEscaping[1]()
+    print(test1.x)
+    test1.testEscapingKeepRef()
+    test1.testEscapingNotKeepRef()
+}
+//External Keep Ref
+arrayEscaping[2]()
+arrayEscaping[3]()
+//External Not Keep Ref
+arrayEscaping.last?()
+//arrayEscaping[4]()
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 2569}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
