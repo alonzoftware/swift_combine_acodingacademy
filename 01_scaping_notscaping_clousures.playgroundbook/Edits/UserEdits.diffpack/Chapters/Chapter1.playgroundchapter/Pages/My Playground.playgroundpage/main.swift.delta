@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//Normal Function
+func suma (a : Int, b : Int) -&gt; Int {
+    return a + b
+}
+print (suma (a: 5,b: 8))
+//Simple Clousure
+var f = {(a : Int, b : Int)-&gt; Int in return a + b}
+print (f(5 , 6))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 186}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//Not Scaping and Scaping Clousure
+class Test {
+    var x = 10
+    func notScaping(completion : ()-&gt; Void){
+        completion()
+    }
+    func testSync (){
+        notScaping (completion: {x = 15})
+    }
+    
+}
+let test1 = Test()
+print(test1.x)
+test1.testSync()
+print(test1.x)
+</string>
+			<key>ModifiedRange</key>
+			<string>{187, 278}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
