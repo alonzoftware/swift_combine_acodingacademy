@@ -90,18 +90,24 @@ do {
     arrayEscaping[1]()
     print(test1.x)
     test1.testEscapingKeepRef()
-    test1.testEscapingNotKeepRef()
+    //test1.testEscapingNotKeepRef()
 }
 //External Keep Ref
 arrayEscaping[2]()
 arrayEscaping[3]()
+
+do {
+    let test2 = Test()
+    test2.testEscapingNotKeepRef()
+    
+}
 //External Not Keep Ref
 arrayEscaping.last?()
 //arrayEscaping[4]()
 
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 2569}</string>
+			<string>{0, 2642}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
